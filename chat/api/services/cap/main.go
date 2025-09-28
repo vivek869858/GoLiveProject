@@ -8,10 +8,13 @@ import (
 	"syscall"
 
 	"github.com/vivek869858/GoLiveProject/chat/foundation/logger"
+	"github.com/vivek869858/GoLiveProject/chat/foundation/web"
 )
 
 func main() {
-	traceIdfn := func(ctx context.Context) string { return "trace-123" } // Example trace ID function
+	traceIdfn := func(ctx context.Context) string {
+		return web.GetTraceID(ctx).String()
+	} // Example trace ID function
 	log := logger.New(os.Stdout, logger.LevelInfo, "CAP", traceIdfn)
 
 	ctx := context.Background()
